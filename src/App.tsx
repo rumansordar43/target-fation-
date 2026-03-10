@@ -1053,9 +1053,19 @@ export default function App() {
 
   useEffect(() => {
     fetch('/api/products')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch products');
+        return res.json();
+      })
       .then(data => {
         setProducts(data);
+      })
+      .catch(err => {
+        console.error('Error loading products:', err);
+        // Fallback to empty products if API fails
+        setProducts([]);
+      })
+      .finally(() => {
         setLoading(false);
       });
     

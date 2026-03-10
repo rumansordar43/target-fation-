@@ -7,7 +7,8 @@ import Database from "better-sqlite3";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const db = new Database("target_fashion.db");
+const dbPath = process.env.VERCEL ? "/tmp/target_fashion.db" : "target_fashion.db";
+const db = new Database(dbPath);
 
 // Initialize Database
 db.exec(`
@@ -121,10 +122,10 @@ for (const s of defaultSettings) {
   insertSetting.run(s.key, s.value);
 }
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
+export const app = express();
+const PORT = 3000;
 
+async function startServer() {
   app.use(express.json());
 
   // API Routes
@@ -292,9 +293,11 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+  if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }
 }
 
 startServer();
