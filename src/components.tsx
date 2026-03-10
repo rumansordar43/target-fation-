@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn, formatPrice, CATEGORIES, DIVISIONS, SIZES } from './utils';
 import { Product, CartItem } from './types';
+import logoImg from './assets/logo.png';
+import logoNameImg from './assets/logo-name.png';
 
 // --- Components ---
 
@@ -81,12 +83,12 @@ export const Navbar = ({ cartCount }: { cartCount: number }) => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/logo.png" 
+              src={logoImg} 
               alt="Target Fashion Logo" 
               className="h-10 md:h-12 object-contain"
             />
             <img 
-              src="/logo name.png" 
+              src={logoNameImg} 
               alt="Target Fashion Name" 
               className="h-6 md:h-8 object-contain"
             />
@@ -155,8 +157,8 @@ export const Navbar = ({ cartCount }: { cartCount: number }) => {
             >
               <div className="flex justify-between items-center mb-12">
                 <div className="flex items-center space-x-2">
-                  <img src="/logo.png" alt="Logo" className="h-8 object-contain" />
-                  <img src="/logo name.png" alt="Name" className="h-4 object-contain" />
+                  <img src={logoImg} alt="Logo" className="h-8 object-contain" />
+                  <img src={logoNameImg} alt="Name" className="h-4 object-contain" />
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="text-main-text">
                   <X size={24} />
@@ -226,8 +228,8 @@ export const Footer = () => {
         {/* Column 1 */}
         <div className="space-y-6">
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/logo.png" alt="Logo" className="h-8 object-contain" />
-            <img src="/logo name.png" alt="Name" className="h-4 object-contain" />
+            <img src={logoImg} alt="Logo" className="h-8 object-contain" />
+            <img src={logoNameImg} alt="Name" className="h-4 object-contain" />
           </Link>
           <p className="text-gray-500 text-sm leading-relaxed">
             Premium T-shirts crafted for the streets of Bangladesh. Wear your target with confidence and style.
