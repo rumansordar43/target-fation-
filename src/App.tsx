@@ -288,6 +288,15 @@ const ProductDetail = ({ products, addToCart }: { products: Product[], addToCart
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(product.images[0]);
+  const [whatsappNumber, setWhatsappNumber] = useState('8801856078978');
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.whatsapp_number) setWhatsappNumber(data.whatsapp_number);
+      });
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
@@ -395,7 +404,7 @@ const ProductDetail = ({ products, addToCart }: { products: Product[], addToCart
             </div>
 
             <a 
-              href={`https://wa.me/8801XXXXXXXX?text=আমি এই প্রোডাক্টটি অর্ডার করতে চাই: ${product.name} (Size: ${selectedSize}, Color: ${selectedColor})`}
+              href={`https://wa.me/${whatsappNumber}?text=আমি এই প্রোডাক্টটি অর্ডার করতে চাই: ${product.name} (Size: ${selectedSize}, Color: ${selectedColor})`}
               target="_blank"
               className="w-full flex items-center justify-center py-4 border border-[#25D366] text-[#25D366] font-bold uppercase tracking-widest hover:bg-[#25D366] hover:text-white transition-all"
             >
@@ -892,6 +901,14 @@ const AdminPanel = ({ onLogout }: { onLogout: () => void }) => {
                   rows={3}
                   value={settings.announcement_text || ''}
                   onChange={e => setSettings({...settings, announcement_text: e.target.value})}
+                  className="w-full bg-main-bg border border-[var(--border-color)] p-4 text-main-text focus:border-royal-gold outline-none"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-gray-500">WhatsApp Number (e.g., 8801856078978)</label>
+                <input 
+                  value={settings.whatsapp_number || ''}
+                  onChange={e => setSettings({...settings, whatsapp_number: e.target.value})}
                   className="w-full bg-main-bg border border-[var(--border-color)] p-4 text-main-text focus:border-royal-gold outline-none"
                 />
               </div>

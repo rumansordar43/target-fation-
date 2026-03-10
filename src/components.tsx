@@ -210,6 +210,16 @@ export const Navbar = ({ cartCount }: { cartCount: number }) => {
 };
 
 export const Footer = () => {
+  const [whatsappNumber, setWhatsappNumber] = useState('8801856078978');
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.whatsapp_number) setWhatsappNumber(data.whatsapp_number);
+      });
+  }, []);
+
   return (
     <footer className="bg-main-bg border-t border-[var(--border-color)] pt-20 pb-10 px-4 md:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -226,10 +236,10 @@ export const Footer = () => {
             <a href="https://www.facebook.com/profile.php?id=61582254746458" target="_blank" className="text-main-text hover:text-royal-gold transition-colors">
               <Facebook size={20} />
             </a>
-            <a href="#" className="text-main-text hover:text-royal-gold transition-colors">
+            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" className="text-main-text hover:text-royal-gold transition-colors">
               <MessageCircle size={20} />
             </a>
-            <a href="#" className="text-main-text hover:text-royal-gold transition-colors">
+            <a href="mailto:info@targetfashion.com" className="text-main-text hover:text-royal-gold transition-colors">
               <Mail size={20} />
             </a>
           </div>
@@ -265,7 +275,7 @@ export const Footer = () => {
           <div className="space-y-4 text-sm text-gray-400">
             <p className="flex items-center space-x-3">
               <Phone size={16} className="text-royal-gold" />
-              <span>+880 1XXX XXXXXX</span>
+              <span>+{whatsappNumber.slice(0, 3)} {whatsappNumber.slice(3, 7)}-{whatsappNumber.slice(7)}</span>
             </p>
             <p className="flex items-center space-x-3">
               <Mail size={16} className="text-royal-gold" />
@@ -372,9 +382,19 @@ export const ProductCard = ({ product }: { product: Product, key?: any }) => {
 };
 
 export const WhatsAppButton = () => {
+  const [whatsappNumber, setWhatsappNumber] = useState('8801856078978');
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.whatsapp_number) setWhatsappNumber(data.whatsapp_number);
+      });
+  }, []);
+
   return (
     <a 
-      href="https://wa.me/8801XXXXXXXX?text=আমি Target Fashion থেকে অর্ডার করতে চাই" 
+      href={`https://wa.me/${whatsappNumber}?text=আমি Target Fashion থেকে অর্ডার করতে চাই`} 
       target="_blank"
       className="fixed bottom-6 right-6 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-transform animate-pulse-gentle"
     >

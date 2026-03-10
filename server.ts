@@ -113,7 +113,8 @@ const defaultSettings = [
   { key: 'feature3_desc', value: '3-4 day exchange policy' },
   { key: 'feature4_enabled', value: 'true' },
   { key: 'feature4_title', value: 'Premium Quality' },
-  { key: 'feature4_desc', value: '100% cotton fabric' }
+  { key: 'feature4_desc', value: '100% cotton fabric' },
+  { key: 'whatsapp_number', value: '8801856078978' }
 ];
 const insertSetting = db.prepare("INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)");
 for (const s of defaultSettings) {
