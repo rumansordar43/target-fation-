@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #F5F5F0;
+  --text-color: #080808;
+  --card-bg: #FFFFFF;
+  --border-color: rgba(0, 0, 0, 0.05);
+  --glass-bg: rgba(245, 245, 240, 0.8);
+}
+
+.dark {
+  --bg-color: #080808;
+  --text-color: #F5F5F0;
+  --card-bg: #161616;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(8, 8, 8, 0.8);
+}
+
+@theme {
+  --color-deep-black: #080808;
+  --color-royal-gold: #C9A84C;
+  --color-steel-blue: #1E3A8A;
+  --color-crimson-red: #8B1A2B;
+  --color-off-white: #F5F5F0;
+  --color-dark-card: var(--card-bg);
+  --color-main-bg: var(--bg-color);
+  --color-main-text: var(--text-color);
+
+  --font-cinzel: "Cinzel", serif;
+  --font-raleway: "Raleway", sans-serif;
+  --font-noto-bengali: "Noto Sans Bengali", sans-serif;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-gentle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+.animate-pulse-gentle {
+  animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+
+@layer base {
+  body {
+    @apply bg-main-bg text-main-text font-raleway antialiased transition-colors duration-300;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cinzel;
+  }
+
+  .bangla {
+    @apply font-noto-bengali;
+  }
+}
+
+/* Custom Utilities */
+.glass {
+  @apply bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--border-color)];
+}
+
+.btn-gold {
+  @apply bg-royal-gold text-deep-black font-bold py-3 px-8 rounded-none transition-all hover:bg-deep-black hover:text-royal-gold hover:scale-105 active:scale-95;
+}
+
+.dark .btn-gold {
+  @apply hover:bg-white hover:text-deep-black;
+}
+
+.btn-outline {
+  @apply border border-royal-gold text-royal-gold font-bold py-3 px-8 rounded-none transition-all hover:bg-royal-gold hover:text-deep-black active:scale-95;
+}
